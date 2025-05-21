@@ -1,14 +1,19 @@
+import { header } from "./header.js";
+
+header();
+
+const h1DOM = document.querySelector('h1');
 const formDOM = document.forms[0];
 const inputDOM = document.getElementById('task');
 const listDOM = document.querySelector('.list');
 
 let count = 0;
-let deleteCount = 0;
+let deletedCount = 0;
 
 formDOM.addEventListener('submit', event => {
     event.preventDefault();
 
-    listDOM.innerHTML `
+    listDOM.innerHTML = `
         <div class="item">
             <div class="header">
                 <div class="index">${++count}</div>
@@ -17,13 +22,17 @@ formDOM.addEventListener('submit', event => {
             <div class="content">${inputDOM.value}</div>
         </div>` + listDOM.innerHTML;
 
+    inputDOM.value = '';
+    inputDOM.focus();
     const deleteBtnListDOM = document.querySelectorAll('.btn');
 
     for (const btnDOM of deleteBtnListDOM) {
         btnDOM.addEventListener('click', () => {
             btnDOM.parentNode.parentNode.remove();
+            deletedCount++;
+            h1DOM.textContent = `Task planner (${count - deletedCount})`;
         });
     }
 
-
+    h1DOM.textContent = `Task planner (${count - deletedCount})`;
 });

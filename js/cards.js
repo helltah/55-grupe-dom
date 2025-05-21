@@ -14,3 +14,4 @@ listDOM.innerHTML += `<div class="card">
             <a class="card-link" href="#">Read more...</a>
         </div>`;
 }
+
